@@ -1,0 +1,9 @@
+.venv
+.tmp_charm
+__pycache__
+*.pyc
+data
+tmp
+output
+bridge/node_modules
+fabric-samples

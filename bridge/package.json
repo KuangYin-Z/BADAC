@@ -1,0 +1,11 @@
+{
+  "name": "gw",
+  "version": "1.0.0",
+  "private": true,
+  "main": "gw.js",
+  "dependencies": {
+    "@grpc/grpc-js": "1.14.3",
+    "@hyperledger/fabric-gateway": "1.10.1"
+  }
+}
+

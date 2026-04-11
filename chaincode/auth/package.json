@@ -1,0 +1,17 @@
+{
+  "name": "auth",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "fabric-chaincode-node start"
+  },
+  "dependencies": {
+    "fabric-contract-api": "2.5.8",
+    "fabric-shim": "2.5.8"
+  }
+}
+
