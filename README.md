@@ -2,25 +2,55 @@
 
 BADAC is the prototype code release for the paper *Blockchain-Assisted Anonymous Device Authentication with Access Control for Cross-Domain Industrial IoT*.
 
-This repository contains only the core prototype code needed to inspect the scheme, start a local demo, and understand how the protocol is mapped into code. It does not include the paper sources, benchmark result datasets, plotting scripts, or the official Hyperledger Fabric sample repository.
+This repository is intended to serve as the paper-companion code repository. It contains the core prototype implementation needed to inspect the scheme, start a local demo, and understand how the protocol is mapped into code.
 
 ## Scope
 
-- Prototype code only
+What is included:
+
+- Core BADAC prototype code
 - Local runnable demo
-- Core protocol logic, Fabric bridge, and chaincode
-- No paper files
-- No benchmark artifacts
-- No pre-downloaded third-party Fabric samples
+- Python-side protocol logic
+- Fabric gateway bridge
+- Hyperledger Fabric chaincode
 
-## Requirements
+What is not included:
 
-- Docker
-- Python 3
-- Node.js
+- Paper source files
+- Benchmark raw-result datasets
+- Plotting scripts
+- Pre-downloaded third-party Fabric samples
+
+This separation is intentional: the repository is a code companion for the protocol prototype, not a full artifact bundle for the paper evaluation.
+
+## Tested Environment
+
+The repository has been tested in a local Linux/WSL2 workflow with:
+
+- Docker 29.1.5
+- Node.js 20.18.1
+- Python 3.12.3
 - Bash
 
+The application container is built from `node:20-bookworm` and installs:
+
+- Python 3
+- `Flask==3.1.3`
+- `cryptography==46.0.5`
+- `charm-crypto-framework==0.62`
+- PBC 1.0.0
+
+The Fabric demo path is pinned to:
+
+- Hyperledger Fabric peer/orderer 2.5.15
+- Hyperledger Fabric CA 1.5.17
+- Fabric nodeenv 2.5
+
+## External Dependency Note
+
 The demo scripts download Hyperledger Fabric samples on demand into `fabric-samples/`. That directory is treated as a local runtime dependency and is not part of this repository.
+
+To reduce upstream drift, `scripts/fab_get.sh` fetches the official Fabric install script from the pinned `v2.5.15` branch rather than from the moving `main` branch.
 
 ## Quick Start
 
@@ -76,6 +106,24 @@ The public interface follows the workflow described in the paper.
 - Signature verification failure
 - Duplicate `sid` replay rejection on chain
 
+## Citation and Versioning
+
+This repository should be cited as a software companion to the BADAC paper. The first paper-companion release is `v1.0.0`.
+
+GitHub can expose repository citation metadata through `CITATION.cff`. If you cite the code in a paper, please cite a tagged release rather than a moving branch tip.
+
+A BibTeX entry consistent with the current repository metadata is:
+
+```bibtex
+@misc{mao2026badaccode,
+  author       = {Mao, Ziyan},
+  title        = {{BADAC}: Prototype Implementation for Blockchain-Assisted Anonymous Device Authentication with Access Control for Cross-Domain Industrial IoT},
+  year         = {2026},
+  howpublished = {\url{https://github.com/KuangYin-Z/BADAC}},
+  note         = {GitHub repository, version v1.0.0}
+}
+```
+
 ## Prototype Boundaries
 
 This code is a local research prototype rather than a production system.
@@ -83,22 +131,23 @@ This code is a local research prototype rather than a production system.
 - The KGC is trusted during setup and key issuance
 - The deployment target is a local prototype environment
 - The online orchestration is minimal by design
-- Production-grade operations, revocation governance, distributed key management, and hardened deployment concerns are out of scope
+- Production-grade operations, revocation governance, distributed key management, benchmark packaging, and hardened deployment concerns are out of scope
 
-## Notes
+## Interface Summary
 
-- The Flask routes remain:
-  - `/init`
-  - `/reg`
-  - `/pub`
-  - `/pull`
-  - `/sign`
-  - `/verify`
-  - `/result`
-- The chaincode functions remain:
-  - `putPp`, `getPp`
-  - `putCh`, `getCh`
-  - `putRq`, `getRq`
-  - `putRs`, `getRs`
+The Flask routes are:
 
-This repository is intended to be readable directly on GitHub and suitable for use as the paper's code repository.
+- `/init`
+- `/reg`
+- `/pub`
+- `/pull`
+- `/sign`
+- `/verify`
+- `/result`
+
+The chaincode functions are:
+
+- `putPp`, `getPp`
+- `putCh`, `getCh`
+- `putRq`, `getRq`
+- `putRs`, `getRs`

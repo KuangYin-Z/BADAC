@@ -12,7 +12,7 @@ if [[ -x fabric-samples/bin/peer ]] \
   exit 0
 fi
 
-curl -fsSL https://raw.githubusercontent.com/hyperledger/fabric/main/scripts/install-fabric.sh \
+curl -fsSL https://raw.githubusercontent.com/hyperledger/fabric/v2.5.15/scripts/install-fabric.sh \
   | bash -s -- -f 2.5.15 -c 1.5.17 samples binary docker
 
 docker pull hyperledger/fabric-nodeenv:2.5 >/dev/null
